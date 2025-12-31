@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy New Year 🖤🎀</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #fff0f6, #f3e8ff);
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    .bg-kuro {
+      position: fixed;
+      font-size: 26px;
+      opacity: 0.15;
+      pointer-events: none;
+      animation: floatSlow 18s linear infinite;
+    }
+
+    @keyframes floatSlow {
+      from { transform: translateY(110vh) rotate(0deg); }
+      to { transform: translateY(-120vh) rotate(360deg); }
+    }
+
+    .center {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.95);
+      border-radius: 32px;
+      padding: 40px 34px;
+      max-width: 860px;
+      width: 100%;
+      box-shadow: 0 25px 55px rgba(120,0,120,0.18);
+      animation: popIn 1.2s ease;
+      position: relative;
+    }
+
+    .card::after {
+      content: '🎀';
+      position: absolute;
+      top: -18px;
+      right: -18px;
+      font-size: 34px;
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.92) translateY(30px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(2.2rem, 6vw, 3rem);
+      color: #9b5de5;
+      margin-bottom: 14px;
+    }
+
+    p {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: #555;
+    }
+
+    .btn {
+      margin-top: 30px;
+      padding: 14px 30px;
+      border: none;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #9b5de5, #f15bb5);
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(155,93,229,0.4);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 16px 40px rgba(155,93,229,0.55);
+    }
+
+    .memory { display: none; }
+    .memory.show { display: flex; }
+
+    .memory-content {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .photo-box {
+      flex: 1 1 360px;
+      height: 340px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #f15bb5, #9b5de5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .photo-box::after {
+      content: '🖤🎀';
+      position: absolute;
+      bottom: 14px;
+      right: 18px;
+      font-size: 24px;
+    }
+
+    .photo-box img,
+    .photo-box video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 28px;
+      pointer-events: none; /* allow clicks to pass through media */
+    }
+
+    .text-box {
+      flex: 1 1 340px;
+      text-align: left;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 26px;
+      gap: 12px;
+      position: relative;
+      z-index: 5; /* ensure buttons are clickable above media */
+    }
+
+    .count {
+      margin-top: 18px;
+      font-size: 0.9rem;
+      color: #888;
+      text-align: center;
+    }
+
+    .sparkle {
+      position: fixed;
+      font-size: 18px;
+      animation: floatUp 5s linear forwards;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(-120vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PRE-INTRO LOCK PAGE -->
+  <section class="center" id="pre-intro">
+    <div class="card">
+      <h1>Hey my love 💜</h1>
+      <p>
+        I made something special just for you.
+        <br>
+        Let’s wait for the perfect moment to open it together ✨
+      </p>
+      <div id="preCountdown" style="margin-top:18px;font-weight:600;color:#9b5de5;"></div>
+    </div>
+  </section>
+
+  <section class="center" id="intro" style="display:none;">
+    <div class="card">
+      <h1>Happy New Year, my love 🖤🎀</h1>
+      <p>
+        My love, I wish you a very, very happy new year. As this new year is about to begin, I want you to slowly fade away everything that weighed you down this past year — and carry forward only the good memories, even though the every second that i live with you is so good and special but still these are some of them , the warm moments, and the love that made you smile.
+        <br><br>
+        So let’s start this year with something close to my heart — some of <strong>my favorite memories with you</strong>. I hope, somewhere deep down, they’re your favorites too 🖤
+      </p>
+      <div id="countdown" style="margin-top:16px;font-weight:600;color:#9b5de5;"></div>
+      <button class="btn" id="startBtn" disabled style="opacity:.6;cursor:not-allowed;">Start our memories 🎀</button>
+    </div>
+  </section>
+
+  <section class="center memory" id="memory">
+    <div class="card">
+      <div class="memory-content">
+        <div class="photo-box" id="photo"></div>
+        <div class="text-box" id="text"></div>
+      </div>
+      <div class="nav">
+        <button class="btn" id="prevBtn" type="button">◀</button>
+        <button class="btn" id="nextBtn" type="button">▶</button>
+      </div>
+      <div class="count" id="count"></div>
+    </div>
+  </section>
+
+  <section class="center" id="final" style="display:none;">
+    <div class="card">
+      <h1>Happy New Year, my love ✨🎆</h1>
+      <p>
+        As this year comes to an end, there’s just one thing my heart keeps wishing — that I was right there with you. I wish I could kiss you softly, hold you close, and end this year with the best feeling possible… with you.
+        <br><br>
+        And as the new year begins, I want to start it the same way — with love, warmth, and us. Even if we’re apart, my heart is choosing you, stepping into this new year with you, and holding onto the hope of all the beautiful moments waiting for us ahead.
+        <br><br>
+        Happy New Year, my love 🤍 I’m carrying you with me into every tomorrow.
+      </p>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const DEV_BYPASS = false; // 🔓 DEV MODE: set to false before sending
+      const memories = [
+        { media: { type: 'video', src: 'media/memory1.mp4' }, text: 'the sm concert lets start with this the starting of our beautiful jorney, this day was so diabolical all perfect we almost all day together,, you held my hand for the first time i was amazed , my heart raced a little , you took me out of the croud and then you fell almost fell on me my heart beat got faster like omg how on earth this miracle happend but then i saw ohhh fuck you are unconsious ... but yeah it was perfect . i still remember when i was standing next to you ans we were looking at out reflection in the window I so much wantd to put my hand on your waist butt ahh i was so nervous ... I LOVEE YOU MY BABYY s'},
+        { media: { type: 'video', src: 'media/memory2.mp4' }, text: 'this was the first time i bought someone in my life a rose , and I remember i forgot to give it to you before exam , i wanted to make your day by giving you it before exam so that your exam will go good . I remember how hesitant i was to give it to you i waws nervous if you would accept it or not but whenyou saw it you were smiling ahh that feeling o my god it was amazing . then you sent a snap, you posted that on story ohh i cant even explain to you how good i felt i litteraly jumped out of my bed and danced out of happines when i say your story then i recorded it . I LOVE YOU SO MUUUCH MY BABY.' },
+        { media: { type: 'image', src: 'media/memory3.png' }, text: 'omg you remeber these , yeah obv you do ... although these were belated gifts for your birthday but each one of it was specially chosen for you onlyfor you and the box i made it...... and omg when i gave you youuu were so happpy , so much happy , even though you already knew what are they before i gave them to you but yeah it was sooo goood to see you smile and so happy and i will surely make this upcoming year more happy for you . I LOVEE YOU SO MUCH MY BABBYYY.' },
+        { media: { type: 'image', src: 'media/memory4.png' }, text: 'here comes the day which changed our lifes i guess so ....this day was soo perfect , when i called you and told you to comeout , you were like waht are you for real ehy did you come , and i was like ese hi ...... you came down i saw you  , black top black leggings looking damnnnnnn soo beautiful , then I was giving you the bouqet and you said no no no wait , can we go somewhere else and i saidd yeah . then i gave you the bag , i asked that SHREEYA WILL YOU BE MY GIRLFREIND.... and guess what you said that no i cant , it was okay but i got upset when you said that i cant take them home i swear if you would have not taken them i would have thrown them at the same place .... but leave it thiss dayyyyyyyyy ohhhhh god you gave me a hug ..A HUG , A HUGGGGG  to me ,, it our first hug omg ... I LOVEEE YOU SO MUCH MY BABBYYY' },
+        { media: { type: 'video', src: 'media/memory5.mp4' }, text: 'One of my favorite days, because you were part of it. this day was so special , so fucking special.. like you slept on my shoulder for the first time OOOOMMMMGGGGGGGG , like this day was the start and to this day I still fee do special and so comfortable and so good when you lean on my shoulder and sleep ...ohhh i want this for the rest of my life ....., this was also the day i got my second hug , when i dropped you to mohan nagar ,I LOVE YOUUU SOO MUCHH BABYYYYY (ARE MERA BACHHAA ABHI SE ANKH ME AASU ABHI TO OR H RUK JAO )' },
+        { media: { type: 'video', src: 'media/memory6.mp4' }, text: 'This dayyyyyyyyyy the best the best the best ..... you remeber what happend this day rightttt  i gave you this little gift told you what i feel like my feelings , why i feel nervous to touch to why I dont touch you , ovs before this you though i am not atrcted to you physically but yeah and yok what else , I kissed your forehead this day and oh yeah ..... on the way home i was holding your hand all the way you were hugging me from the back ahhhhh that was so unbeliveable for me that day ahh ..I LOVEEEEEEEEEEEEEE YOUUUUU SOOO much  ' },
+        { media: { type: 'video', src: 'media/memory7.mp4' }, text: 'thissss day is sooo special we drank this day the smirronoff jamun you wante to try , you dont remeber but let me tell you again that please dont kiss me after we drink , and i promised you that i will not , then we drank it was so fun i saw the drunk shreeya for the first time , you were so smiling like smiling all the time and , and after this we went in the lift and you tried to kiss me but i refused .... yes i refused , because i promised you , ohhh I LOVEEEEE YOUUUUUUUU SOOOOOOO MUCH BABYYYYYYY ' },
+        { media: { type: 'video', src: 'media/memory8.mp4' }, text: 'Oh my god this day this day was so beautiful like this day was unbelievable unbelievable to me literally we spent so much time alone in that room in that green room like oh my god will did a lot of things that was amazing so amazing we clicked sooo much pictures and you shut down my lap on that day it was so fucking amazing so perfect it was on another level damnnnnnnnn  I LOVEEEEEEEEEEEE YOUUUU SOOOOOO MUCHHHH BABBYYYYYYYYY' },
+        { media: { type: 'video', src: 'media/memory9.mp4' }, text: 'This day was pure joy , full of peace from the start , i came to your house my goddddd , i am the first guy who came to your house , meeee , then wow i saw you andddddddd ahhhhhhhhhhhhhhhhhhhhhhhh you were looking so stunnning , awesome , preetiest , cutest , the most beautifull , omg strawberry in that red ghagra choli , it was damnnnnnnnnn , i litteraly sayed ki are badhiya lag rhi ho in front of your mom, then we left and oohhhh it was like a long driveeee , i fucking loved that soo much , it was unbelivable , the ride , the dance , the time we spent together, the video in which i picked you up in my arms ,, then again the long ride to your homee , sham ka timeee omg that was amazingggggg ..... io want that again, I LOVVVEEEEEE YOUUUU SOOOOOOOOOOO MUCH MY CHOTUUUU SA BACHAA .' },
+        { media: { type: 'video', src: 'media/memory10.mp4' }, text: 'here comes Diwali and you know it was so unbelievable so unmasible for me that I came to your house in the night like it was so unpland matlab I just got the time matlab you said ki that I am sad that I cant take photos then I was so sad yaar you couldnt take photos then I went then I just went straight out of my house started the bike and directly came to your house OMG  then I saawwww you you were looking wowwwww wowwwwww wowwwww allll I was saying after looking you was wowwwwwww and we kissed tooo yayyyy ,I LOVEEEEEEEEEEEEEEEEEEEE YOUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUHHHHHHHHHHHHHH BABBYYYYYYY' },
+        { media: { type: 'video', src: 'media/memory11.mp4' }, text: 'thissssssss dayyy .. YOU WON the fasion show . you showed everyone why you are THE PRESIDENT of fashion , you worked so hard in practise , in making that dress even when you were frustated of them , you still did not loose you hope . you managed every thing perfectly , youmade it clear that nobody is anyway near you , I was so happy for you that day , you seeemed sooo happppy , you bursted out of joy when the anouncement was made . I was just looking at you and was sooo happy ..... I LOVEEEEEEE YOUUUU SOOO MUCH BABBYYYY  . ' },
+        { media: { type: 'video', src: 'media/memory12.mp4' }, text: 'ENDING WITH THE GREATEST DAY OF THIS YEAR MY BIRTHDAY, i love this day more than any day in my life , you me whole day what could i ask for more , you were loookng sooo damnn beautiful , so fucking gorgeous , you were just looking smash just smash , the whole day was so perfect and the gifts , the phots in the photo booth , the time we spent in the restraunt everything was just unbeliveable , I LOVEEEEE YOUUU SO MUCHHHHHHHHHHH MY EVRY THING MY WHOLE WORLD MY DARLING MY BACHAA I LOVEEEEEE YOUU MORE THAN INFINIEE MUAAAAAAAAAAAAAAAAAAAAAH    (sorry gotta end this now im an this from the time i came home , sorry i planned so much more but exams got me busy but i hope you like this ) ' }
+    ]
+
+      let index = 0;
+
+      const intro = document.getElementById('intro');
+      const memorySection = document.getElementById('memory');
+      const finalSection = document.getElementById('final');
+      const photoBox = document.getElementById('photo');
+      const textBox = document.getElementById('text');
+      const count = document.getElementById('count');
+
+      function render() {
+        const memory = memories[index];
+        photoBox.innerHTML = '';
+
+        if (memory.media.type === 'image') {
+          const img = document.createElement('img');
+          img.src = memory.media.src;
+          img.onerror = () => {
+            photoBox.innerHTML = '<div style="color:white;padding:16px;text-align:center;">Image failed to load<br>Check filename & case</div>';
+          };
+          photoBox.appendChild(img);
+        } else {
+          const video = document.createElement('video');
+          video.src = memory.media.src;
+          video.controls = true;
+          video.playsInline = true;
+          video.preload = 'metadata';
+          video.onerror = () => {
+            photoBox.innerHTML = '<div style="color:white;padding:16px;text-align:center;">Video failed to load<br>Check format / filename / case</div>';
+          };
+          photoBox.appendChild(video);
+        }
+
+        textBox.innerHTML = `<p>${memory.text}</p>`;
+        count.textContent = `Memory ${index + 1} of ${memories.length}`;
+      }
+
+      function startMemories() {
+        intro.style.display = 'none';
+        memorySection.classList.add('show');
+        render();
+      }
+
+      function nextMemory() {
+        if (index < memories.length - 1) {
+          index++;
+          render();
+        } else {
+          memorySection.style.display = 'none';
+          finalSection.style.display = 'flex';
+        }
+      }
+
+      function prevMemory() {
+        if (index > 0) {
+          index--;
+          render();
+        }
+      }
+
+      // START BUTTON
+      const startBtn = document.getElementById('startBtn');
+      startBtn.addEventListener('click', startMemories);
+
+      // COUNTDOWN TO MIDNIGHT
+      const countdownEl = document.getElementById('countdown');
+      // COUNTDOWN TO MIDNIGHT (PRE-INTRO)
+      const preCountdownEl = document.getElementById('preCountdown');
+      let timer = null;
+
+      function updateCountdown() {
+        // 🔓 DEV MODE BYPASS
+        if (DEV_BYPASS) {
+          preCountdownEl.textContent = '🛠 Dev mode: unlocked';
+          document.getElementById('pre-intro').style.display = 'none';
+          intro.style.display = 'flex';
+          startBtn.disabled = false;
+          startBtn.style.opacity = '1';
+          startBtn.style.cursor = 'pointer';
+          if (timer) clearInterval(timer);
+          return;
+        }
+
+        const now = new Date();
+        const midnight = new Date();
+        midnight.setHours(24, 0, 0, 0 );
+        const diff = midnight - now;
+
+        if (diff <= 0) {
+          preCountdownEl.textContent = '✨ It’s time ✨';
+          document.getElementById('pre-intro').style.display = 'none';
+          intro.style.display = 'flex';
+          startBtn.disabled = false;
+          startBtn.style.opacity = '1';
+          startBtn.style.cursor = 'pointer';
+          clearInterval(timer);
+          return;
+        }
+
+        const h = Math.floor(diff / (1000 * 60 * 60));
+        const m = Math.floor((diff / (1000 * 60)) % 60);
+        const s = Math.floor((diff / 1000) % 60);
+        preCountdownEl.textContent = `Opening in ${h}h ${m}m ${s}s 💫`;
+      }
+
+      updateCountdown();
+      timer = setInterval(updateCountdown, 1000);
+      document.getElementById('nextBtn').addEventListener('click', () => {
+        console.log('Next clicked');
+        nextMemory();
+      });
+      document.getElementById('prevBtn').addEventListener('click', prevMemory);
+
+      function spawnSparkle() {
+        const s = document.createElement('div');
+        s.className = 'sparkle';
+        s.textContent = Math.random() > 0.5 ? '🎀' : '🖤';
+        s.style.left = Math.random() * 100 + 'vw';
+        s.style.bottom = '-20px';
+        s.style.fontSize = 14 + Math.random() * 20 + 'px';
+        document.body.appendChild(s);
+        setTimeout(() => s.remove(), 5000);
+      }
+
+      setInterval(spawnSparkle, 500);
+
+      const kuroIcons = ['🖤','🎀','💜','☠️'];
+      function spawnKuroBg() {
+        const k = document.createElement('div');
+        k.className = 'bg-kuro';
+        k.textContent = kuroIcons[Math.floor(Math.random() * kuroIcons.length)];
+        k.style.left = Math.random() * 100 + 'vw';
+        k.style.fontSize = 18 + Math.random() * 22 + 'px';
+        k.style.animationDuration = 14 + Math.random() * 10 + 's';
+        document.body.appendChild(k);
+        setTimeout(() => k.remove(), 20000);
+      }
+
+      setInterval(spawnKuroBg, 900);
+    });
+  </script>
+
+</body>
+</html>
